@@ -3,8 +3,12 @@ package kr.co.yermi.firstboot.info;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +29,57 @@ public class InfoController {
 	public InfoController(InfoService infoService) {
 		this.infoService = infoService;
 	}
+	
+	@PostMapping(value="cityAdd")
+	public ResponseEntity<String> cityAdd(@RequestBody City city) {
+		try {
+			log.info("city = {}", city.toString());
+			log.info(city.getId().toString());
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<>("", HttpStatus.OK);
+	}
+	
+//	@PostMapping(value="cityAdd")
+//	public ResponseEntity<City> cityAdd(@RequestBody City city) {
+//		log.info("city = {}", city.toString());
+//		return new ResponseEntity<>(city, HttpStatus.OK);
+//	}
+
+//	@PostMapping(value="cityAdd")
+//	public ResponseEntity<String> cityAdd(String name, String countryCode, String district, Integer population) {
+//		log.info("name = {}, ctCode = {}, district = {}, population ={}", name, countryCode, district, population);
+//		return new ResponseEntity<>("", HttpStatus.OK);
+//	}
+	
+//	@GetMapping(value="cityAdd")
+//	public Object cityAdd(City city) {
+//		log.info("city = {}", city.toString());
+//		return "ok";
+//	}
+	
+//	@GetMapping("cityAdd")
+//	public Object cityAdd(@RequestParam(value="name", required=true) String name
+//			, @RequestParam(value="countryCode", required=true) String ctCode
+//			, @RequestParam(value="district", required=true) String district
+//			, @RequestParam(value="population", required = false, defaultValue = "0") int population) {
+//		
+//		log.info("name = {}, ctCode = {}, district = {}, population ={}", name, ctCode, district, population);
+//		
+//		return "ok";
+//	}
+	
+//	@GetMapping("cityAdd/{name}/{countryCode}/{district}/{population}")
+//	public Object cityAdd(@PathVariable(value="name") String name
+//			, @PathVariable(value="countryCode") String ctCode
+//			, @PathVariable(value="district") String district
+//			, @PathVariable(value="population") int population) {
+//		
+//		log.info("name = {}, ctCode = {}, district = {}, population ={}", name, ctCode, district, population);
+//		
+//		return "ok";
+//	}
 	
 	@GetMapping("cityListByCode/{countryCode}/{population}")
 	public List<City> cityByCountryCode(@PathVariable("countryCode") String ctCode, @PathVariable("population") int population) {
