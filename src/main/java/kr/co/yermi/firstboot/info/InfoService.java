@@ -19,6 +19,14 @@ public class InfoService {
 		this.cityRepository = cityRepository;
 	}
 	
+	public List<City> findCityByCodeAndPopulation(String countryCode, int population) {
+		return this.cityRepository.findByCountryCodeAndPopulation(countryCode, population);
+	}
+	
+	public List<City> getCityList() {
+		return this.cityRepository.findList();
+	}
+
 	public Project getProjectInfo() {
 		Project project = new Project();
 		project.projectName = "firstboot";
@@ -28,7 +36,4 @@ public class InfoService {
 		return project;
 	}
 	
-	public List<City> getCityList() {
-		return this.cityRepository.findList();
-	}
 }
