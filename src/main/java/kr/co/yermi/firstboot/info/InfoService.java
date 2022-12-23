@@ -18,22 +18,33 @@ public class InfoService {
 	public InfoService(CityRepository cityRepository) {
 		this.cityRepository = cityRepository;
 	}
-	
-	public List<City> findCityByCodeAndPopulation(String countryCode, int population) {
-		return this.cityRepository.findByCountryCodeAndPopulation(countryCode, population);
-	}
-	
-	public List<City> getCityList() {
-		return this.cityRepository.findList();
-	}
 
 	public Project getProjectInfo() {
 		Project project = new Project();
 		project.projectName = "firstboot";
 		project.author = "yermi";
 		project.createDate = new Date();
-		
 		return project;
+	}
+	
+	public List<City> getCityList() {
+		return this.cityRepository.findList();
+	}
+
+	public List<City> findCityByCodeAndPopulation(String countryCode, int population) {
+		return this.cityRepository.findByCountryCodeAndPopulation(countryCode, population);
+	}
+	
+	public City insert(City city) {
+		return this.cityRepository.insert(city);
+	}
+
+	public Integer updateById(City city) {
+		return cityRepository.updateById(city);
+	}
+	
+	public Integer deleteById(Integer id) {
+		return cityRepository.deleteById(id);
 	}
 	
 }

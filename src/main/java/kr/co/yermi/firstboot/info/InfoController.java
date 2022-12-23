@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.yermi.firstboot.info.model.City;
@@ -30,15 +29,38 @@ public class InfoController {
 		this.infoService = infoService;
 	}
 	
-	@PostMapping(value="cityAdd")
-	public ResponseEntity<String> cityAdd(@RequestBody City city) {
+	@PostMapping(value="cityDelete")
+	public ResponseEntity<String> cityDelete(@RequestBody City city) {
 		try {
-			log.info("city = {}", city.toString());
-			log.info(city.getId().toString());
-		} catch (Exception e) {
+			log.info("city id = {}", city.getId());
+			Integer deletedCnt = infoService.deleteById(city.getId());
+			return new ResponseEntity<>(String.format("%d deleted", deletedCnt), HttpStatus.OK);
+		}catch (Exception e) {
+			log.error(e.toString());
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<>("", HttpStatus.OK);
+	}
+	
+	@PostMapping(value="cityEdit")
+	public ResponseEntity<String> cityEdit(@RequestBody City city) {
+		try {
+			log.info("city = {}", city.toString());
+			Integer updatedCnt = infoService.updateById(city);
+			return new ResponseEntity<>(String.format("%d updated", updatedCnt), HttpStatus.OK);
+		}catch (Exception e) {
+			log.error(e.toString());
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping(value="cityAdd")
+	public ResponseEntity<City> cityAdd(@RequestBody City city) {
+		try {
+			log.info("city = {}", city.toString());
+			return new ResponseEntity<>(infoService.insert(city), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 //	@PostMapping(value="cityAdd")
