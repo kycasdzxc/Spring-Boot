@@ -621,3 +621,21 @@
 [INFO ] 23:35:04.645 k.c.y.firstboot.info.InfoController - city id = 4080
 [INFO ] 23:35:04.658 com.zaxxer.hikari.HikariDataSource - user - Starting...
 [INFO ] 23:35:04.760 com.zaxxer.hikari.HikariDataSource - user - Start completed.
+[INFO ] 23:48:10.377 o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+[INFO ] 23:48:10.803 o.a.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8080"]
+[INFO ] 23:48:10.806 o.a.catalina.core.StandardService - Stopping service [Tomcat]
+[INFO ] 23:48:10.824 o.a.c.c.C.[Tomcat].[localhost].[/] - Destroying Spring FrameworkServlet 'dispatcherServlet'
+[WARN ] 23:48:10.969 o.a.c.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [user housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17.0.2/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base@17.0.2/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:252)
+ java.base@17.0.2/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1672)
+ java.base@17.0.2/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base@17.0.2/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base@17.0.2/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1062)
+ java.base@17.0.2/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1122)
+ java.base@17.0.2/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+ java.base@17.0.2/java.lang.Thread.run(Thread.java:833)
+[INFO ] 23:48:10.985 o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+[INFO ] 23:48:11.006 o.a.coyote.http11.Http11NioProtocol - Destroying ProtocolHandler ["http-nio-8080"]
+[INFO ] 23:48:11.060 com.zaxxer.hikari.HikariDataSource - user - Shutdown initiated...
+[INFO ] 23:48:11.223 com.zaxxer.hikari.HikariDataSource - user - Shutdown completed.
